@@ -60,6 +60,7 @@ class KeyboardController:
         
         # kbhit instance
         self.kb = kbhit.KBHit()
+        self.print_help()
 
         # initialize start point of Pepper
         self.p = (0,0,0)
@@ -81,6 +82,8 @@ class KeyboardController:
         # check if any keys hit
         if self.kb.kbhit():
             k = self.kb.getch()
+            if ord(k) == 27:
+                rospy.signal_shutdown("Escape pressed!")
             if k == 'w':
                 rospy.loginfo('pressed w : forward')
                 self.move_forward()
@@ -138,6 +141,18 @@ class KeyboardController:
         self.q = tr.quaternion_from_euler(*self.old_euler)
         return
 
+
+    def print_help(self):
+        help_string = \
+        """
+        'w'   ~  Move forward
+        's'   ~  Move backward
+        'a'   ~  Rotate counterclockwise
+        'd'   ~  Rotate clockwise
+        'ESC' ~  Quit
+        """
+        print help_string
+        return
 
 
 def main():

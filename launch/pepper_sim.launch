@@ -8,7 +8,7 @@
   <include file="$(find pepper_description)/launch/pepper_upload.launch" />  
 
 
-  <!-- <node name="keyboard_controller" pkg="pepper_tutorial" type="keyboard_controller.py" launch-prefix="xterm -e" required="true"/> -->
+  <node name="keyboard_controller" pkg="pepper_tutorial" type="keyboard_controller.py" launch-prefix="xterm -e" required="true"/>
 
   <!-- load visualization staff -->
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />  
