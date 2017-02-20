@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- define args -->
+  <arg name="gui" default="True"/>
+
+  <!-- define params -->
+  <!-- pepper robot description set through launch file of pepper_description urdf -->
+  <include file="$(find pepper_description)/launch/pepper_upload.launch" />  
+
+
+  <!-- <node name="keyboard_controller" pkg="pepper_tutorial" type="keyboard_controller.py" launch-prefix="xterm -e" required="true"/> -->
+
+  <!-- load visualization staff -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />  
+  <!-- <node name="world_base" pkg="tf" type="static_transform_publisher" args="0 0 0 0 0 0 base base_link 1" /> -->
+  <node pkg="joint_state_publisher" type="joint_state_publisher" name="joint_state_publisher" output="screen" >
+	<param name="use_gui" value="$(arg gui)" /> 
+  </node>
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find pepper_tutorial)/rviz/pepper_sim.rviz" required="True"/>
+
+
+
+
+
+  <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
+  <!-- <include file="$(find gazebo_ros)/launch/empty_world.launch"> -->
+  <!--   <arg name="world_name" value="$(find pepper_gazebo_plugin)/worlds/naoFoot.world"/> -->
+  <!--   <arg name="paused" value="true"/> -->
+  <!-- </include> -->
+
+
+  <!-- Call Pepper Robot Trajectory Controller -->
+
+  <!-- <include file="$(find pepper_control)/launch/pepper_control_trajectory.launch"/> -->
+
+  <!-- <include file="$(find pepper_control)/launch/pepper_control_position.launch"/> -->
+  <!-- Spawn a robot into Gazebo -->
+  <!-- <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" -->
+  <!--   args="-param robot_description -urdf -x -0.5 -y 1 -z 0.88 -model pepper_MP" /> -->
+
+</launch>
+
+
+
